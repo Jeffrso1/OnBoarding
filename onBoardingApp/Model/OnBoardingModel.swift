@@ -16,6 +16,6 @@ class OnBoardingModel {
     var pagesArray: [OnBoardingVC] = []
     let imagesArray: [String] = ["teste_OB", "teste_OB2", "ALKASKJAS"]
     let titlesArray: [String] = ["Você pode fazer isso", "Você pode fazer aquilo", "Faça agora mesmo!"]
-    let messagesArray: [String] = ["Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta????", "Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta????", "Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta???? Teco tecto do birojuice do oudrikandalarrai da minha sacoleta????"]
+    let messagesArray: [String] = ["Lorem ipsum rhoncus cras mattis est porttitor eu phasellus, eu suspendisse ultricies senectus vestibulum.", "Lorem ipsum rhoncus cras mattis est porttitor eu phasellus, eu suspendisse ultricies senectus vestibulum.", "Lorem ipsum rhoncus cras mattis est porttitor eu phasellus, eu suspendisse ultricies senectus vestibulum."]
     
 }

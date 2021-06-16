@@ -80,7 +80,7 @@ extension OnBoardingPageVC {
         NSLayoutConstraint.activate([
             pageControl.widthAnchor.constraint(equalTo: view.widthAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 20),
-            pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
         ])
     }
     
@@ -92,20 +92,20 @@ extension OnBoardingPageVC {
         
         NSLayoutConstraint.activate([
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             nextButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
     func setupSkipButton() {
-        skipButton.setTitle("Pular", for: .normal)
+        skipButton.setTitle("Pular :(", for: .normal)
         skipButton.setTitleColor(.black, for: .normal)
         
         view.addSubview(skipButton)
         
         NSLayoutConstraint.activate([
             skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             skipButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }

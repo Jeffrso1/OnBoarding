@@ -9,6 +9,15 @@ import UIKit
 
 class OnBoardingView: UIView {
     
+    var stackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 40
+        
+        return stackView
+    }()
+    
     var currentImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +43,7 @@ class OnBoardingView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.sizeToFit()
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 17)
         
         return label
@@ -61,25 +71,27 @@ class OnBoardingView: UIView {
     }
     
     func setupView() {
-        self.addSubview(currentImage)
-        self.addSubview(currentTitle)
-        self.addSubview(currentMessage)
+        stackView.addArrangedSubview(currentImage)
+        stackView.addArrangedSubview(currentTitle)
+        stackView.addArrangedSubview(currentMessage)
+        
+        stackView.setCustomSpacing(60, after: currentImage)
+        
+        self.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            currentImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            currentImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            currentImage.topAnchor.constraint(greaterThanOrEqualTo: self.topAnchor, constant: 80),
+            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            currentImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            currentImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             currentImage.heightAnchor.constraint(equalTo: currentImage.widthAnchor, multiplier: 345/380),
             
-            currentTitle.topAnchor.constraint(equalTo: currentImage.bottomAnchor, constant: 60),
-            currentTitle.leadingAnchor.constraint(equalTo: currentImage.leadingAnchor),
-            currentTitle.trailingAnchor.constraint(equalTo: currentImage.trailingAnchor),
+            currentTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
+            currentTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
             
-            currentMessage.topAnchor.constraint(equalTo: currentTitle.bottomAnchor, constant: 40),
-            currentMessage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -150),
-            currentMessage.leadingAnchor.constraint(equalTo: currentImage.leadingAnchor),
-            currentMessage.trailingAnchor.constraint(equalTo: currentImage.trailingAnchor),
+            currentMessage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            currentMessage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
         ])
-        
     }
 }
