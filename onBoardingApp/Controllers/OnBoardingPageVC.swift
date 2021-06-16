@@ -32,6 +32,9 @@ class OnBoardingPageVC: UIPageViewController {
         return button
     }()
     
+    var nextButtonBottomConstraint: NSLayoutConstraint?
+    var skipButtonBottomConstraint: NSLayoutConstraint?
+    
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
@@ -92,9 +95,11 @@ extension OnBoardingPageVC {
         
         NSLayoutConstraint.activate([
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             nextButton.heightAnchor.constraint(equalToConstant: 20)
         ])
+        
+        nextButtonBottomConstraint = nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+        nextButtonBottomConstraint?.isActive = true
     }
     
     func setupSkipButton() {
@@ -105,9 +110,11 @@ extension OnBoardingPageVC {
         
         NSLayoutConstraint.activate([
             skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             skipButton.heightAnchor.constraint(equalToConstant: 20)
         ])
+        
+        skipButtonBottomConstraint = skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+        skipButtonBottomConstraint?.isActive = true
     }
     
     func fillPagesArray() {
@@ -158,6 +165,26 @@ extension OnBoardingPageVC: UIPageViewControllerDelegate {
         guard let currentIndex = model.pagesArray.firstIndex(of: viewControllers[0] as! OnBoardingVC) else { return }
         
         pageControl.currentPage = currentIndex
+        if pageControl.currentPage == model.pagesArray.count - 1 || pageControl.currentPage == model.pagesArray.count - 2 {
+            animateButtonsBackAndForth()
+        }
+    }
+    
+    private func animateButtonsBackAndForth(){
+        let isCurrentPageLast = pageControl.currentPage == model.pagesArray.count - 1
+        
+        if isCurrentPageLast {
+            skipButtonBottomConstraint?.constant = 80
+            nextButtonBottomConstraint?.constant = 80
+            
+        } else {
+            skipButtonBottomConstraint?.constant = -50
+            nextButtonBottomConstraint?.constant = -50
+        }
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
@@ -166,6 +193,10 @@ extension OnBoardingPageVC {
     @objc
     func pageControlWasTapped(_ sender: UIPageControl) {
         setViewControllers([model.pagesArray[sender.currentPage]], direction: .forward, animated: true, completion: nil)
+        
+        if sender.currentPage == model.pagesArray.count - 1 || sender.currentPage == model.pagesArray.count - 2 {
+            animateButtonsBackAndForth()
+        }
     }
     
     @objc
@@ -174,6 +205,7 @@ extension OnBoardingPageVC {
         pageControl.currentPage = lastPage
         
         setViewControllers([model.pagesArray[lastPage]], direction: .forward, animated: true, completion: nil)
+        animateButtonsBackAndForth()
     }
     
     @objc
@@ -184,6 +216,9 @@ extension OnBoardingPageVC {
         pageControl.currentPage += 1
         setViewControllers([nextPage], direction: .forward, animated: true, completion: nil)
         
+        if pageControl.currentPage == model.pagesArray.count - 1 || pageControl.currentPage == model.pagesArray.count - 2 {
+            animateButtonsBackAndForth()
+        }
     }
     
 }
