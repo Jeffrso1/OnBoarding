@@ -7,13 +7,13 @@
 
 import UIKit
 
-class OnBoardingView: UIView {
+class OnBoardingItemView: UIView {
 
     var stackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 40
+        stackView.spacing = 30
 
         return stackView
     }()
@@ -51,18 +51,14 @@ class OnBoardingView: UIView {
         return label
     }()
 
-    init(forImage currentImage: String, withTitle currentTitle: String, andMessage currentMessage: String) {
+    init(for item: OnBoardingItem) {
         super.init(frame: .zero)
         self.backgroundColor = .white
 
-        if let actualImage = UIImage(named: currentImage) {
-            self.currentImage.image = actualImage
-        } else {
-            self.currentImage.image = UIImage(named: "default")
-        }
-
-        self.currentTitle.text = currentTitle
-        self.currentMessage.text = currentMessage
+        self.currentImage.image = UIImage(named: item.imageName) ?? UIImage(named: "default")
+        
+        self.currentTitle.text = item.title
+        self.currentMessage.text = item.message
 
         setupView()
 
@@ -77,7 +73,7 @@ class OnBoardingView: UIView {
         stackView.addArrangedSubview(currentTitle)
         stackView.addArrangedSubview(currentMessage)
 
-        stackView.setCustomSpacing(60, after: currentImage)
+        stackView.setCustomSpacing(50, after: currentImage)
 
         self.addSubview(stackView)
 
